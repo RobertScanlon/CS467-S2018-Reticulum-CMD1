@@ -36,9 +36,10 @@ class _GameTextFileNames:
     _text_files_filename = "gameText.json"
 
 
-
+# saveGame -> saves current state to file
+# loadGame -> loads saved state and returns game back to caller
 class GameSaver:
-    # try to use pickle module
+    # use pickle module
     def saveGame(self, game):
         f = open(_GameFileNames._game_files_directory
                  + _GameFileNames._saved_game_filename,
@@ -48,40 +49,7 @@ class GameSaver:
         f.close()
 
 
-    # # save to current state of the game to a JSON encoded data file
-    # def saveGame(self, game):
-    #     # gameDict will be written as json to file
-    #     gameDict = {}
-    #
-    #     # load data fields from current state of game
-    #     # into these tmp variables
-    #     gameInventory = game.inventory
-    #     gameMap = game.map
-    #     gameEndFlag = game.end_flag
-    #     gameXCoord = game.xCoord
-    #     gameYCoord = game.yCoord
-    #     gameCurrentRoom = game.current_room.toDict()
-    #
-    #     # create the gameDict as a pseudo game object
-    #     gameDict['inventory'] = gameInventory
-    #     gameDict['map'] = gameMap
-    #     gameDict['end_flag'] = gameEndFlag
-    #     gameDict['xCoord'] = gameXCoord
-    #     gameDict['yCoord'] = gameYCoord
-    #     gameDict['current_room'] = gameCurrentRoom
-    #
-    #     # add another field 'time' to track when this current game
-    #     # was saved
-    #     gameDict['timeSaved'] = time.time()
-    #
-    #     f = open(_GameFileNames._game_files_directory
-    #              + _GameFileNames._saved_game_filename,
-    #              "w")
-    #
-    #     f.write(json.dumps(gameDict))
-    #     f.close()
-
-    # read from a JSON encoded file containing the state of a game when
+    # read from encoded file containing the state of a game when
     # it was saved. Set the data fields of the passed in Game object
     # to the values contained in the data file
     def loadGame(self, game):
@@ -97,37 +65,7 @@ class GameSaver:
         f.close()
         return game
 
-        #
-        # gameInventory = gameDict['inventory']
-        # gameMap = gameDict['map']
-        # gameEndFlag = gameDict['end_flag']
-        # gameXCoord = gameDict['xCoord']
-        # gameYCoord = gameDict['yCoord']
-        #
-        # currRoom = gameDict['current_room']
-        # currRoomInven = []
-        # for i in range(0, len(currRoom['inventory'])):
-        #     currRoomInven.append(Item(currRoom["inventory"][i]["name"],
-        #                               currRoom["inventory"][i]["description"]))
-        #
-        # gameCurrentRoom = Room(currRoom['name'],
-        #                        currRoom['long'],
-        #                        currRoom['short'],
-        #                        currRoom['which_short'],
-        #                        currRoomInven,
-        #                        currRoom['exits'],
-        #                        currRoom['locks'],
-        #                        currRoom['feature1keys'],
-        #                        currRoom['feature2keys'],
-        #                        currRoom['examinable_objects'])
-        #
-        # game.inventory = gameInventory
-        # game.map = gameMap
-        # game.end_flag = gameEndFlag
-        # game.xCoord = gameXCoord
-        # game.yCoord = gameYCoord
-        # game.current_room = gameCurrentRoom
-
+# return a key-value pair dict from gameText file, use for any additional game text
 class TextReader:
     def getTextFromFiles(self):
         textDict = {}
@@ -142,12 +80,7 @@ class TextReader:
             textDict[keys] = textString
 
         return textDict
-        #
-        # demoString = ""
-        # for s in textDict['demoText']:
-        #     demoString = demoString + s + '\n'
-        # textDict['demoText'] = demoString
-        # return textDict
+
 
 # FileReader has one method 'getRoomsFromFiles' which will return
 # a dictionary of Room objects with each key being the full name of the Room.
