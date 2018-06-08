@@ -1,3 +1,10 @@
+# File: FileEngine.py
+# Author: Reticulum Team
+# Date: 6-7-2018 (last edit)
+# Description: This is the file where the FileEngine module is defined.
+#              This module contains all code that reads and writes to and
+#              from the program's data files
+
 from RoomClass import Room
 from ItemClass import Item
 import json
